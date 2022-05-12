@@ -1,0 +1,21 @@
+.BaseSection {
+  height: 100vh;
+  width: 100vw;
+}
+
+.BaseDiv {
+  height: 100vh;
+  width: 100vw;
+}
+
+#BaseSection {
+  background-image: url("../Images/BackgroundImage/b2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#BaseDiv {
+  background-image: url("../Images/BackgroundImage/b1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,49 @@
+.BaseSection {
+  height: 100vh;
+  width: 100vw;
+}
+
+.BaseDiv {
+  height: 100vh;
+  width: 100vw;
+}
+
+#BaseSection {
+  background-image: url("../Images/BackgroundImage/bg2.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-y: top;
+  background-position-x: right;
+}
+
+#BaseDiv {
+  background-image: url("../Images/BackgroundImage/bg1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-y: bottom;
+}
+
+#LeftBox {
+  height: 100vh;
+}
+
+h3 {
+  color: #004d40;
+}
+
+#formBox {
+  background-color: #e0f2f1;
+  border-radius: 10px;
+}
+
+#forgotPasswordButton {
+  color: #004d40;
+  font-weight: 600;
+}
+
+#loginButton {
+  background-color: #26a69a;
+  border: 0px solid transparent;
+  border-radius: 10px;
+  color: #FFFFFF;
+}/*# sourceMappingURL=index.css.map */

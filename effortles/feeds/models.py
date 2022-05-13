@@ -1,4 +1,3 @@
-import django
 from django.db import models
 from django.conf import settings
 
@@ -11,6 +10,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return str(self.id)
+
 
 class Comment(models.Model):
     post_id = models.ForeignKey( Post, on_delete = models.CASCADE )
@@ -19,6 +21,9 @@ class Comment(models.Model):
     like_count = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)
     
 
 class Like(models.Model):
@@ -26,6 +31,9 @@ class Like(models.Model):
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE) 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)
 
 
 class CommentLike(models.Model):
@@ -35,5 +43,7 @@ class CommentLike(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return str(self.id)
 
 

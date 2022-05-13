@@ -1,10 +1,6 @@
-from venv import create
-import django
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
-
-
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
 class Department(models.Model):
@@ -12,12 +8,18 @@ class Department(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return str(self.department_name)
+
 
 class Designation(models.Model):
     designation_name = models.CharField(max_length=128)
     paid_leaves = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.designation_name)
 
 
 class User(AbstractUser):
@@ -29,12 +31,16 @@ class User(AbstractUser):
     ]
 
     user_type = models.CharField(max_length=10, choices=TYPE)
-    # reporting_manager = models.ForeignKey('self', on_delete=models.SET_NULL, 
-    #                                         null=True, blank=True)
+    reporting_manager = models.ForeignKey('self', on_delete=models.SET_NULL, 
+                                            null=True, blank=True)
     department_id = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     designation_id = models.ForeignKey(Designation, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)
+
 
 
 class Profile(models.Model):
@@ -53,9 +59,12 @@ class Profile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return str(self.user_id)
+
 
 class Address(models.Model):
-    profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
     country = models.CharField(max_length=128, default=None)
     state = models.CharField(max_length=128, default=None)
     district = models.CharField(max_length=128, default=None)
@@ -66,6 +75,8 @@ class Address(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return str(self.profile_id)
 
 
 class UserSalaryRecord(models.Model):
@@ -73,6 +84,9 @@ class UserSalaryRecord(models.Model):
     base_salary = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.user_id)
 
 
 class AppliedLeave(models.Model):
@@ -97,11 +111,17 @@ class AppliedLeave(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return str(self.user_id)
 
-class Leaves(models.Model):
+
+class Leave(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     paid_leave_balance = models.IntegerField()
     unpaid_leaves_taken = models.IntegerField()
     half_day_leaves_taken = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.user_id)

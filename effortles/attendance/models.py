@@ -25,6 +25,9 @@ class Attendance(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return str(self.user_id)+" "+str(self.date)
+
 
 class Swipe(models.Model):
     
@@ -38,4 +41,7 @@ class Swipe(models.Model):
     swipe_status = models.CharField(max_length=10, choices=SWIPE_STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.attendance_id)
 
